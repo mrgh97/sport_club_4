@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head></head>
+    <body>
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed"
+                            data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+                            aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span> <span
+                            class="icon-bar"></span> <span class="icon-bar"></span> <span
+                            class="icon-bar"></span>
+                    </button>
+                </div>
+                <div id="navbar" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li th:class="${activePage == 'home'}? 'active' : ''"><a href="#" th:href="@{/}">Home</a></li>
+                        <li th:class="${activePage} == 'workers'? 'active' : ''"><a href="#" th:href="${'/workers'+'?pageNum=0'}">Workers</a></li>
+                        <li th:if="${session.user.getSign()!='normal'}" th:class="${activePage} == 'members'? 'active' : ''"><a href="#" th:href="@{/member}">Members</a></li>
+                    </ul>
+                    <div class="dropdown_fr">
+                        <a style="color: #dce9ff" th:if="${session.user==null}" th:href="@{/login}">Login</a>
+                        <a style="color: #dce9ff" th:href="@{/userCenter}" th:if="${session.user!=null}" th:text="${session.user.getUserName()}"></a>
+                        <a style="  color: #f70e32;padding-left: 15px;" th:href="@{/logOut}" th:if="${session.user!=null}" th:text="'Logout'"></a>
+                    </div>
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+        </nav>
+    </body>
+</html>

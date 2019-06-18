@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Instructor Index</title>
+    <th:block th:include="fragments/head :: head"></th:block>
+</head>
+<body>
+<th:block th:include="fragments/header :: body"></th:block>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">Instructor
+                </div>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Username</th>
+                        <th>Mobile No.</th>
+                        <th>Address</th>
+                        <th>Sign</th>
+                        <th>Coach</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <div th:if="!${#lists.isEmpty(members)}">
+                        <tr th:each = "member : ${members}">
+                            <td th:text = "${member.id}"></td>
+                            <td th:text = "${member.userName}"></td>
+                            <td th:text = "${member.mobileNumber}"></td>
+                            <td th:text = "${member.address}"></td>
+                            <td th:text = "${member.sign}"></td>
+                            <td>
+                                <a th:href="@{${'/workers/view/' + worker.id}}" th:each="worker : ${member.getWorkers()}" th:text="${worker.getFirstName()}+${worker.getLastName()}+'  '"></a>
+                            </td>
+                        </tr>
+                    </div>
+                    </tbody>
+                </table>
+            </div>
+            <ul class="pagination">
+                <li th:class="${pageNum==0}?'disabled' : ''"><a th:href="${'/member'+'?pageNum='+prePage}">&laquo;</a></li>
+                <li th:each="pageNo : ${#numbers.sequence(0, totalPage)}" th:class="${pageNum eq pageNo}? 'active' : ''">
+                    <a th:if="${pageNum  eq pageNo}" href="#">
+                        <span th:text="${pageNo + 1}"></span>
+                    </a>
+                    <a th:if="${not (pageNum  eq pageNo)}" th:href="${'/member'+'?pageNum='+pageNo}">
+                        <span th:text="${pageNo + 1}"></span>
+                    </a>
+                </li>
+                <li th:class="${totalPage==pageNum}?'disabled' : ''"><a th:href="${'/member'+'?pageNum='+nextPage}">&raquo;</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<th:block th:include="fragments/js :: body"></th:block>
+<script src="../static/js/app.js" th:src="@{/js/app.js}"></script>
+</body>
+
+</html>
