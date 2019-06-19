@@ -22,33 +22,21 @@ import javax.sql.DataSource;
 @EnableAuthorizationServer
 public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
 
-    @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
-
-    @Bean
-    @Primary
-    @ConfigurationProperties(prefix = "spring.datasource")
-    public DataSource dataSource(){
-        return DataSourceBuilder.create().build();
-    }
-
-    @Bean
-    public TokenStore tokenStore(){
-        return new JdbcTokenStore(dataSource());
-    }
-
-    @Bean
-    public ClientDetailsService clientDetails(){
-        return new JdbcClientDetailsService(dataSource());
-    }
-
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.withClientDetails(clientDetails());
-    }
+        // 配置客户端
+        clients
+                // 使用内存设置
+                .inMemory()
+                // client_id
+                .withClient("client")
+                // client_secret
+                .secret("secret")
+                // 授权类型
+                .authorizedGrantTypes("authorization_code")
+                // 授权范围
+                .scopes("app")
+                // 注册回调地址
+                .redirectUris("http://localhost:8080/swagger-ui.html");    }
 
-    @Override
-    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        endpoints.tokenStore(tokenStore());
-    }
 }

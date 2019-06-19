@@ -37,8 +37,6 @@ public class WorkerController {
 
     private WorkerService workerService;
 
-    @Autowired
-    private RedisTemplate<Serializable, Object> redisTemplate;
 
     @Autowired
     public void setWorkerService(WorkerService workerService) {

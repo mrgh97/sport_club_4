@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Mono;
 
 @Api
 @RestController
@@ -19,7 +20,7 @@ public class GymController {
 
     @ApiOperation("查看体育馆")
     @GetMapping("")
-    public ResponseEntity<Gym> getGym(){
+    public Mono<Gym> getGym(){
         String name = "西体育馆";
         String location = "北京交通大学";
         Gym gym = new Gym(name,location);
@@ -28,8 +29,6 @@ public class GymController {
                 .methodOn(GymController.class).getGym())
                 .withSelfRel();
         gym.add(selfLink);
-        return ResponseEntity.ok()
-                .headers(HeaderUtil.createAlert("aaa",gym.getName()))
-                .body(gym);
+        return ok();
     }
 }

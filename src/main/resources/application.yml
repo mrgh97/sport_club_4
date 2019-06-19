@@ -1,27 +1,6 @@
 #通用数据源配置
 spring:
-  datasource:
-    jdbc-url: jdbc:mysql://localhost:3306/jpatest?charset=utf8mb4&useSSL=false&allowPublicKeyRetrieval=true
-    username: mrgh1997
-    password: 971103
-    type: com.zaxxer.hikari.HikariDataSource
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    hikari:
-      minimum-idle: 5
-      idle-timeout: 600000
-      maximum-pool-size: 10
-      auto-commit: true
-      pool-name: MyHikariCP
-      max-lifetime: 1800000
-      connection-timeout: 30000
-      connection-test-query: SELECT 1
-
       security:
-        oauth2:
-          client:
-            client-id: client
-            client-secret: secret
-            access-token-uri: http://localhost:8081/oauth/token
-            user-authorization-uri: http://localhost:8081/oauth/authorize
-          resource:
-            token-info-uri: http://localhost:8081/oauth/check_token
+        user:
+          name: admin
+          password: admin

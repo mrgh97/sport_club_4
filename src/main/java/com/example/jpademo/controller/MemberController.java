@@ -10,14 +10,12 @@ import com.example.jpademo.domain.Worker;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
-import org.hibernate.jdbc.Work;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.CacheControl;
@@ -36,9 +34,6 @@ public class MemberController {
 
     private MemberService memberService;
     private WorkerService workerService;
-
-    @Autowired
-    private RedisTemplate<Serializable, Object> redisTemplate;
 
     @Autowired
     public void setWorkerService(WorkerService workerService) {
