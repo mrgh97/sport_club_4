@@ -9,6 +9,7 @@ import reactor.core.publisher.Mono;
 
 @Service
 public class GymService {
+
     private GymRepository gymRepository;
     @Autowired
     public void setGymRepository(GymRepository gymRepository){

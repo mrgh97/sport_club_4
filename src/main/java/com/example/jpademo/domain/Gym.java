@@ -14,7 +14,7 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Gym extends ResourceSupport implements Serializable {
+public class Gym implements Serializable {
 
     public Gym(String name,String location){
         this.name = name;

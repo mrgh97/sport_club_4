@@ -18,7 +18,8 @@ import reactor.core.publisher.Mono;
 @RestController
 @RequestMapping("/api/gym")
 public class GymController {
-    
+
+    @Autowired
     private GymService gymService;
 
     @Autowired
